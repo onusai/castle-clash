@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bmntiy2rxfkvd"]
+
+[node name="ChatMsg" type="RichTextLabel"]
+bbcode_enabled = true
+text = "[color=cyan][Host][/color] [color=orange]Onusai[/color][color=gray]:[/color] hey!"
+fit_content = true
+scroll_following = true

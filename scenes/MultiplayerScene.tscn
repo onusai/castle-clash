@@ -1,0 +1,159 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwytd47obloiv"]
+
+[ext_resource type="Script" path="res://scripts/MultiplayerController.gd" id="1_mgac4"]
+[ext_resource type="Script" path="res://scripts/HPBar.gd" id="2_gc3o6"]
+[ext_resource type="Gradient" uid="uid://c17ki0pdbe1mw" path="res://resources/hp_color_gradient2.tres" id="3_8d8b7"]
+[ext_resource type="Script" path="res://scripts/Chat.gd" id="4_qjt3b"]
+[ext_resource type="PackedScene" uid="uid://4id2hjuhkv57" path="res://scenes/map1.tscn" id="5_cbxgo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_68xou"]
+font_size = 91
+outline_size = 20
+outline_color = Color(1, 1, 1, 0.176471)
+
+[node name="UI" type="Node"]
+script = ExtResource("1_mgac4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="CenterContainer" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/HUD/MainMenu"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/MainMenu/VBox"]
+layout_mode = 2
+text = "Castle Clash"
+label_settings = SubResource("LabelSettings_68xou")
+
+[node name="Username" type="LineEdit" parent="CanvasLayer/HUD/MainMenu/VBox"]
+layout_mode = 2
+placeholder_text = "Username"
+alignment = 1
+
+[node name="IP" type="LineEdit" parent="CanvasLayer/HUD/MainMenu/VBox"]
+layout_mode = 2
+placeholder_text = "Server IP"
+alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/HUD/MainMenu/VBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Host" type="Button" parent="CanvasLayer/HUD/MainMenu/VBox"]
+layout_mode = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="CanvasLayer/HUD/MainMenu/VBox"]
+layout_mode = 2
+text = "Join"
+
+[node name="Start" type="Button" parent="CanvasLayer/HUD/MainMenu/VBox"]
+visible = false
+layout_mode = 2
+text = "Start Game"
+
+[node name="GameUI" type="Control" parent="CanvasLayer/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ping" type="Label" parent="CanvasLayer/HUD/GameUI"]
+layout_mode = 1
+offset_right = 93.0
+offset_bottom = 26.0
+text = "ping: 200ms"
+
+[node name="Control" type="MarginContainer" parent="CanvasLayer/HUD/GameUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_bottom = 47.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="HPBar" type="ProgressBar" parent="CanvasLayer/HUD/GameUI/Control"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+step = 1.0
+value = 100.0
+script = ExtResource("2_gc3o6")
+color_ramp = ExtResource("3_8d8b7")
+
+[node name="Chat" type="MarginContainer" parent="CanvasLayer/HUD/GameUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -215.0
+offset_right = 320.0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("4_qjt3b")
+
+[node name="BG" type="ColorRect" parent="CanvasLayer/HUD/GameUI/Chat"]
+visible = false
+layout_mode = 2
+color = Color(0, 0, 0, 0.239216)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/GameUI/Chat"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/HUD/GameUI/Chat/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+follow_focus = true
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/GameUI/Chat/VBoxContainer/ScrollContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/HUD/GameUI/Chat/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="Timer1s" type="Timer" parent="."]
+autostart = true
+
+[node name="MenuBG" type="Node2D" parent="."]
+
+[node name="Map" parent="MenuBG" instance=ExtResource("5_cbxgo")]
+
+[node name="Camera2D" type="Camera2D" parent="MenuBG"]
+position = Vector2(735, 216)
+
+[connection signal="pressed" from="CanvasLayer/HUD/MainMenu/VBox/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD/MainMenu/VBox/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD/MainMenu/VBox/Start" to="." method="_on_start_pressed"]
+[connection signal="text_submitted" from="CanvasLayer/HUD/GameUI/Chat/VBoxContainer/LineEdit" to="CanvasLayer/HUD/GameUI/Chat" method="_on_line_edit_text_submitted"]
+[connection signal="timeout" from="Timer1s" to="." method="_on_timer_1s_timeout"]

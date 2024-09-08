@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpeirg5jmk6j5"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_u3nkp"]
+[ext_resource type="PackedScene" uid="uid://ju37bkcmsgqw" path="res://scenes/player.tscn" id="2_7puof"]
+[ext_resource type="PackedScene" uid="uid://4id2hjuhkv57" path="res://scenes/map1.tscn" id="3_lg4cn"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_u3nkp")
+PlayerScene = ExtResource("2_7puof")
+
+[node name="Map" parent="." groups=["map"] instance=ExtResource("3_lg4cn")]
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]

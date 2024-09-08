@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://pjwbaef18duu"]
+
+[ext_resource type="Script" path="res://scripts/arrow1.gd" id="1_3xcge"]
+[ext_resource type="Texture2D" uid="uid://7jbqhiq6ex64" path="res://images/arrow.png" id="2_38mho"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulp5v"]
+size = Vector2(12, 2)
+
+[node name="Node2D" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_3xcge")
+
+[node name="ArrowSprite" type="Sprite2D" parent="."]
+position = Vector2(6, -1.78814e-07)
+rotation = 0.785398
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_38mho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, 4.17233e-07)
+shape = SubResource("RectangleShape2D_ulp5v")
+
+[node name="projectile_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="projectile_hitbox"]
+position = Vector2(6, 4.17233e-07)
+shape = SubResource("RectangleShape2D_ulp5v")

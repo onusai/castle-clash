@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://dik4m2bjca6je"]
+
+[ext_resource type="Texture2D" uid="uid://btvtfqf5k45f3" path="res://images/pirate_bomb/7-Objects/6-Candle/1.png" id="1_xqkaf"]
+[ext_resource type="Texture2D" uid="uid://jpufa5318vty" path="res://images/pirate_bomb/7-Objects/6-Candle/2.png" id="2_35620"]
+[ext_resource type="Texture2D" uid="uid://81jy8y7tqd3u" path="res://images/pirate_bomb/7-Objects/6-Candle/3.png" id="3_4f80q"]
+[ext_resource type="Texture2D" uid="uid://ko6rhg0fggwn" path="res://images/pirate_bomb/7-Objects/6-Candle/4.png" id="4_wdtug"]
+[ext_resource type="Texture2D" uid="uid://df0vn3yrykcnm" path="res://images/pirate_bomb/7-Objects/6-Candle/5.png" id="5_cqlh4"]
+[ext_resource type="Texture2D" uid="uid://vdn13nd8eoyb" path="res://images/pirate_bomb/7-Objects/6-Candle/6.png" id="6_yj7p7"]
+[ext_resource type="Texture2D" uid="uid://cstu5xa5i7fus" path="res://images/pirate_bomb/7-Objects/6-Candle/7.png" id="7_sdswp"]
+[ext_resource type="Texture2D" uid="uid://dpw7yeu1twybh" path="res://images/pirate_bomb/7-Objects/6-Candle/8.png" id="8_f6rju"]
+[ext_resource type="Script" path="res://scripts/candle_light.gd" id="9_hiubr"]
+[ext_resource type="Texture2D" uid="uid://bt5h1n84alttw" path="res://images/pictureLightMask2_thumb.png" id="10_6v4i7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d2x0l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xqkaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_35620")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4f80q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wdtug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cqlh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yj7p7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_sdswp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f6rju")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="candle" type="AnimatedSprite2D"]
+position = Vector2(172, 547)
+scale = Vector2(1.9, 1.9)
+sprite_frames = SubResource("SpriteFrames_d2x0l")
+autoplay = "default"
+frame_progress = 0.408305
+script = ExtResource("9_hiubr")
+metadata/_edit_group_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(1.25, 1)
+color = Color(0.788235, 0.435294, 0.227451, 1)
+energy = 1.76
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.2
+texture = ExtResource("10_6v4i7")

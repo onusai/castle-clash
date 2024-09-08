@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4jmwy238aivc"]
+
+[ext_resource type="Texture2D" uid="uid://65kltnkhlc3k" path="res://images/char1.png" id="1_ep15y"]
+[ext_resource type="Script" path="res://scripts/player_explode.gd" id="2_l2s50"]
+
+[sub_resource type="Gradient" id="Gradient_ntxh2"]
+offsets = PackedFloat32Array(0, 0.518519, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.948148, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_si2ob"]
+gradient = SubResource("Gradient_ntxh2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sjn5r"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 40.0
+angle_min = -341.0
+angle_max = 341.1
+spread = 180.0
+initial_velocity_max = 63.16
+gravity = Vector3(0, 200, 0)
+attractor_interaction_enabled = false
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_si2ob")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45lp7"]
+atlas = ExtResource("1_ep15y")
+region = Rect2(10.6823, 75.5361, 4.34647, 5.58829)
+
+[node name="PlayerExplode" type="GPUParticles2D"]
+texture_filter = 1
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_sjn5r")
+texture = SubResource("AtlasTexture_45lp7")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.62
+script = ExtResource("2_l2s50")
