@@ -31,6 +31,8 @@ var hp = max_hp
 
 var DieParticleScene = preload("res://scenes/player_explode.tscn")
 
+var arrows = 10
+
 func _ready():
 	Events.connect("player_quit", player_quit)
 	
@@ -46,6 +48,7 @@ func _ready():
 		respawn()
 		$PlayHPBar.hide()
 		$Username.hide()
+		set_arrows(20)
 	else:
 		sync_start(p_id)
 		
@@ -65,6 +68,7 @@ func respawn():
 	global_position = spawn_point.global_position
 	if is_local:
 		set_hp.rpc(100)
+		set_arrows(20)
 
 @rpc("any_peer", "call_local", "reliable")
 func die():
@@ -101,9 +105,10 @@ func _physics_process(delta):
 		syncOld = false
 
 		if Input.is_action_just_pressed("Shoot"):
-			if can_shoot:
+			if can_shoot and arrows > 0:
 				shoot.rpc($WepRotation/BulletSpawn.global_position, $WepRotation.rotation_degrees, p_id)
 				can_shoot = false
+				set_arrows(arrows - 1)
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		
@@ -164,6 +169,14 @@ func _physics_process(delta):
 			set_hp.rpc(0)
 			var msg = "[color=Slateblue]" + Game.get_local_player().name + " fell into the void"
 			Events.chat_sent.emit(msg)
+
+func set_arrows(amount):
+	arrows = amount
+	Events.arrows_changed.emit(arrows)
+	if arrows <= 0:
+		$WepRotation/BowSprite.hide()
+	else:
+		$WepRotation/BowSprite.show()
 
 func player_quit(id):
 	if p_id == id:

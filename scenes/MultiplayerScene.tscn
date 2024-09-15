@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwytd47obloiv"]
+[gd_scene load_steps=10 format=3 uid="uid://cwytd47obloiv"]
 
 [ext_resource type="Script" path="res://scripts/MultiplayerController.gd" id="1_mgac4"]
 [ext_resource type="Script" path="res://scripts/HPBar.gd" id="2_gc3o6"]
+[ext_resource type="Script" path="res://scripts/game_ui.gd" id="2_mqrfk"]
+[ext_resource type="Texture2D" uid="uid://clcwvunxfefwf" path="res://images/pirate_bomb/7-Objects/17-Heart/1-Idle/22.png" id="3_3wgj1"]
 [ext_resource type="Gradient" uid="uid://c17ki0pdbe1mw" path="res://resources/hp_color_gradient2.tres" id="3_8d8b7"]
+[ext_resource type="Texture2D" uid="uid://7jbqhiq6ex64" path="res://images/arrow.png" id="4_5qasp"]
 [ext_resource type="Script" path="res://scripts/Chat.gd" id="4_qjt3b"]
 [ext_resource type="PackedScene" uid="uid://4id2hjuhkv57" path="res://scenes/map1.tscn" id="5_cbxgo"]
 
@@ -76,6 +79,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_mqrfk")
 
 [node name="ping" type="Label" parent="CanvasLayer/HUD/GameUI"]
 layout_mode = 1
@@ -94,13 +98,37 @@ grow_horizontal = 0
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 
-[node name="HPBar" type="ProgressBar" parent="CanvasLayer/HUD/GameUI/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/GameUI/Control"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/HUD/GameUI/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/GameUI/Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("3_3wgj1")
+expand_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="CanvasLayer/HUD/GameUI/Control/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 step = 1.0
 value = 100.0
 script = ExtResource("2_gc3o6")
 color_ramp = ExtResource("3_8d8b7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD/GameUI/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/GameUI/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("4_5qasp")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/GameUI/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "x10"
 
 [node name="Chat" type="MarginContainer" parent="CanvasLayer/HUD/GameUI"]
 layout_mode = 1

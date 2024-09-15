@@ -137,6 +137,9 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath(".:syncOld")
 properties/5/spawn = true
 properties/5/replication_mode = 1
+properties/6/path = NodePath("WepRotation/BowSprite:visible")
+properties/6/spawn = true
+properties/6/replication_mode = 1
 
 [sub_resource type="Animation" id="Animation_x16m6"]
 length = 0.001
